@@ -1,0 +1,213 @@
+{
+  "instrumento": "PROART",
+  "referencia": "Facas, E. P. (2021). PROART: Riscos Psicossociais Relacionados ao Trabalho. Editora Fi.",
+  "total_itens": 91,
+  "escala_likert": {
+    "min": 1,
+    "max": 5,
+    "rotulos": {
+      "1": "Nunca",
+      "2": "Raramente",
+      "3": "Às vezes",
+      "4": "Frequentemente",
+      "5": "Sempre"
+    }
+  },
+  "regras_privacidade": {
+    "min_respondentes_por_grupo": 5
+  },
+  "escalas": {
+    "EOT_Organizacao_do_Trabalho": {
+      "tipo_classificacao": "risco_direto",
+      "faixas": [
+        { "min": 1.0, "max": 2.29, "rotulo": "Risco Alto" },
+        { "min": 2.3, "max": 3.69, "rotulo": "Risco Médio" },
+        { "min": 3.7, "max": 5.0, "rotulo": "Risco Baixo" }
+      ],
+      "fatores": {
+        "Divisao_das_Tarefas": {
+          "alpha_referencia": 0.85,
+          "invertidos": [],
+          "itens": {
+            "eot_01": "Os recursos de trabalho são em número suficiente para a realização das tarefas",
+            "eot_02": "O número de trabalhadores é suficiente para a execução das tarefas",
+            "eot_03": "Os equipamentos são adequados para a realização das tarefas",
+            "eot_04": "O espaço físico disponível para a realização do trabalho é adequado",
+            "eot_05": "O ritmo de trabalho é adequado",
+            "eot_06": "Possuo condições adequadas para alcançar os resultados esperados do meu trabalho",
+            "eot_07": "Os prazos para a realização das tarefas são flexíveis"
+          }
+        },
+        "Divisao_Social_do_Trabalho": {
+          "alpha_referencia": 0.90,
+          "invertidos": [],
+          "itens": {
+            "eot_08": "A comunicação entre chefe e subordinado é adequada",
+            "eot_09": "As orientações que me são passadas para realizar as tarefas são coerentes entre si",
+            "eot_10": "Tenho liberdade para opinar sobre o meu trabalho",
+            "eot_11": "Os funcionários participam das decisões sobre o trabalho",
+            "eot_12": "Tenho autonomia para realizar as tarefas como julgo melhor",
+            "eot_13": "As informações de que preciso para executar minhas tarefas são claras",
+            "eot_14": "Há qualidade na comunicação entre os funcionários",
+            "eot_15": "Há justiça na distribuição das tarefas",
+            "eot_16": "Há clareza na definição das tarefas",
+            "eot_17": "Há flexibilidade nas normas para a execução das tarefas",
+            "eot_18": "A avaliação do meu trabalho inclui aspectos além da minha produção",
+            "eot_19": "As tarefas que executo em meu trabalho são variadas"
+          }
+        }
+      }
+    },
+    "EEG_Estilos_de_Gestao": {
+      "tipo_classificacao": "predominancia",
+      "ponto_medio": 3.0,
+      "faixas": [
+        { "min": 1.0, "max": 2.49, "rotulo": "Pouco característico" },
+        { "min": 2.5, "max": 3.5, "rotulo": "Presença moderada" },
+        { "min": 3.51, "max": 5.0, "rotulo": "Predominante" }
+      ],
+      "fatores": {
+        "Estilo_Individualista": {
+          "alpha_referencia": 0.85,
+          "invertidos": [],
+          "itens": {
+            "eeg_01": "Nesta organização os gestores se consideram o centro do mundo",
+            "eeg_02": "Os gestores desta organização se consideram insubstituíveis",
+            "eeg_03": "Os gestores desta organização fazem qualquer coisa para chamar a atenção",
+            "eeg_04": "Aqui os gestores preferem trabalhar individualmente",
+            "eeg_05": "Em meu trabalho, incentiva-se a idolatria dos chefes",
+            "eeg_06": "Há forte controle do trabalho",
+            "eeg_07": "A hierarquia é valorizada nesta organização",
+            "eeg_08": "O ambiente de trabalho se desorganiza com mudanças",
+            "eeg_09": "Os laços afetivos são fracos entre as pessoas desta organização",
+            "eeg_10": "É creditada grande importância para as regras nesta organização"
+          }
+        },
+        "Estilo_Coletivista": {
+          "alpha_referencia": 0.93,
+          "invertidos": [],
+          "itens": {
+            "eeg_11": "O trabalho coletivo é valorizado pelos gestores",
+            "eeg_12": "A competência dos trabalhadores é valorizada pela gestão",
+            "eeg_13": "Os gestores se preocupam com o bem estar dos trabalhadores",
+            "eeg_14": "Para esta organização, o resultado do trabalho é visto como uma realização do grupo",
+            "eeg_15": "O mérito das conquistas na empresa é de todos",
+            "eeg_16": "Somos incentivados pelos gestores a buscar novos desafios",
+            "eeg_17": "A inovação é valorizada nesta organização",
+            "eeg_18": "As decisões nesta organização são tomadas em grupo",
+            "eeg_19": "Os gestores favorecem o trabalho interativo de profissionais de diferentes áreas",
+            "eeg_20": "Existem oportunidades semelhante de ascensão para todas as pessoas",
+            "eeg_21": "As pessoas são compromissadas com a organização mesmo quando não há retorno adequado"
+          }
+        }
+      }
+    },
+    "EIST_Indicadores_de_Sofrimento": {
+      "tipo_classificacao": "risco_inverso",
+      "faixas": [
+        { "min": 1.0, "max": 2.29, "rotulo": "Risco Baixo" },
+        { "min": 2.3, "max": 3.69, "rotulo": "Risco Médio" },
+        { "min": 3.7, "max": 5.0, "rotulo": "Risco Alto" }
+      ],
+      "fatores": {
+        "Falta_de_Sentido_do_Trabalho": {
+          "alpha_referencia": 0.90,
+          "invertidos": [],
+          "itens": {
+            "eist_01": "Meu trabalho é sem sentido",
+            "eist_02": "Meu trabalho é irrelevante para o desenvolvimento da sociedade",
+            "eist_03": "Minhas tarefas são banais",
+            "eist_04": "Considero minhas tarefas insignificantes",
+            "eist_05": "Sinto-me improdutivo no meu trabalho",
+            "eist_06": "A identificação com minhas tarefas é inexistente",
+            "eist_07": "Sinto-me inútil em meu trabalho",
+            "eist_08": "Sinto-me desmotivado para realizar minhas tarefas",
+            "eist_09": "Permaneço neste emprego por falta de oportunidade no mercado trabalho"
+          }
+        },
+        "Esgotamento_Mental": {
+          "alpha_referencia": 0.91,
+          "invertidos": [],
+          "itens": {
+            "eist_10": "Meu trabalho é desgastante",
+            "eist_11": "Meu trabalho é cansativo",
+            "eist_12": "Meu trabalho me sobrecarrega",
+            "eist_13": "Meu trabalho me desanima",
+            "eist_14": "Meu trabalho me frustra",
+            "eist_15": "Meu trabalho me faz sofrer",
+            "eist_16": "Meu trabalho me causa insatisfação",
+            "eist_17": "Submeter meu trabalho a decisões políticas é fonte de revolta"
+          }
+        },
+        "Falta_de_Reconhecimento": {
+          "alpha_referencia": 0.92,
+          "invertidos": [],
+          "itens": {
+            "eist_18": "Falta-me liberdade para dialogar com minha chefia",
+            "eist_19": "Minha chefia trata meu trabalho com indiferença",
+            "eist_20": "Há desconfiança na relação entre chefia e subordinado",
+            "eist_21": "O trabalho que realizo é desqualificado pela chefia",
+            "eist_22": "Sou excluído do planejamento de minhas próprias tarefas",
+            "eist_23": "Falta-me liberdade para dizer o que penso sobre meu trabalho",
+            "eist_24": "Meus colegas são indiferentes comigo",
+            "eist_25": "Meus colegas desvalorizam meu trabalho",
+            "eist_26": "É difícil a convivência com meus colegas",
+            "eist_27": "A submissão do meu chefe à ordens superiores me causa revolta",
+            "eist_28": "Meu trabalho é desvalorizado pela organização"
+          }
+        }
+      }
+    },
+    "EDT_Danos_Relacionados_ao_Trabalho": {
+      "tipo_classificacao": "risco_inverso",
+      "faixas": [
+        { "min": 1.0, "max": 2.29, "rotulo": "Risco Baixo" },
+        { "min": 2.3, "max": 3.69, "rotulo": "Risco Médio" },
+        { "min": 3.7, "max": 5.0, "rotulo": "Risco Alto" }
+      ],
+      "fatores": {
+        "Danos_Psicologicos": {
+          "alpha_referencia": 0.94,
+          "invertidos": [],
+          "itens": {
+            "edt_01": "Sensação de vazio",
+            "edt_02": "Amargura",
+            "edt_03": "Tristeza",
+            "edt_04": "Vontade de Desistir de Tudo",
+            "edt_05": "Perda da auto-confiança",
+            "edt_06": "Solidão",
+            "edt_07": "Mau-Humor"
+          }
+        },
+        "Danos_Sociais": {
+          "alpha_referencia": 0.91,
+          "invertidos": [],
+          "itens": {
+            "edt_08": "Dificuldade com os amigos",
+            "edt_09": "Conflitos nas relações familiares",
+            "edt_10": "Agressividade com os outros",
+            "edt_11": "Dificuldades nas relações fora do trabalho",
+            "edt_12": "Impaciência com as pessoas em geral",
+            "edt_13": "Vontade de ficar sozinho",
+            "edt_14": "Insensibilidade em relação aos colegas"
+          }
+        },
+        "Danos_Fisicos": {
+          "alpha_referencia": 0.93,
+          "invertidos": [],
+          "itens": {
+            "edt_15": "Dores nas pernas",
+            "edt_16": "Dores nas costas",
+            "edt_17": "Dores no corpo",
+            "edt_18": "Dores no braço",
+            "edt_19": "Distúrbios circulatórios",
+            "edt_20": "Dor de cabeça",
+            "edt_21": "Distúrbios digestivos",
+            "edt_22": "Alterações no sono",
+            "edt_23": "Alterações no apetite"
+          }
+        }
+      }
+    }
+  }
+}
