@@ -31,35 +31,7 @@ with open(CONFIG_PATH, "r", encoding="utf-8") as f:
 st.set_page_config(
     page_title="PRO Tools — Questionário PROART",
     page_icon="protools.png",
-    layout="wide"
-)
-
-def img_to_base64(caminho_arquivo: str) -> str:
-    with open(caminho_arquivo, "rb") as f:
-        return base64.b64encode(f.read()).decode("utf-8")
-
-logo_b64 = img_to_base64("protools.png")
-
-st.markdown(
-    f"""
-    <div style="
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        padding: 16px 24px;
-        margin-bottom: 14px;
-        border-radius: 12px;
-        border: 1px solid rgba(128, 128, 128, 0.25);
-        background-color: rgba(255, 255, 255, 0.03);
-    ">
-        <img src="data:image/png;base64,{logo_b64}" alt="PRO Tools" style="width: 100px; height: 100px; border-radius: 10px; object-fit: contain;">
-        <div>
-            <div style="font-size: 2rem; font-weight: 700; line-height: 1.15;">PRO Tools</div>
-            <div style="font-size: 1.3rem; opacity: 0.82;">Aplicação do Protocolo de Avaliação PROART</div>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
+    layout="wide",
 )
 
 CAMPOS_DEMO = [
@@ -233,6 +205,16 @@ def localizar_logo(nome_base: str) -> str | None:
             if os.path.isfile(caminho):
                 return caminho
     return None
+
+
+def _arquivo_para_data_uri(caminho: str | None) -> str | None:
+    if not caminho or not os.path.isfile(caminho):
+        return None
+    ext = os.path.splitext(caminho)[1].lower().lstrip(".")
+    mime = "jpeg" if ext == "jpg" else ext
+    with open(caminho, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode("utf-8")
+    return f"data:image/{mime};base64,{b64}"
 
 
 def garantir_csv() -> None:
@@ -823,23 +805,52 @@ def aplicar_estilos_frontend() -> None:
     st.markdown(
         """
         <style>
-            .proart-faixa-logos {
+            .protools-header-card {
                 display: flex;
                 align-items: center;
-                justify-content: space-evenly;
-                width: 100%;
-                gap: 28px;
+                justify-content: space-between;
+                gap: 24px;
+                padding: 16px 24px;
                 margin-bottom: 16px;
-                padding: 12px 16px;
-                background: #ffffff;
-                border: 1px solid #e5e7eb;
                 border-radius: 12px;
+                border: 1px solid #e5e7eb;
+                background-color: #ffffff;
                 flex-wrap: wrap;
             }
-            .proart-faixa-logos img {
-                max-height: 96px;
+            .protools-header-left {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+            }
+            .protools-header-logo {
+                width: 84px;
+                height: 84px;
+                border-radius: 10px;
+                object-fit: contain;
+                flex-shrink: 0;
+            }
+            .protools-header-title {
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1.15;
+                color: #0f172a;
+            }
+            .protools-header-subtitle {
+                font-size: 1.15rem;
+                color: #475569;
+            }
+            .protools-header-right {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 28px;
+                flex-wrap: wrap;
+            }
+            .protools-header-right img {
+                max-height: 76px;
                 width: auto;
                 object-fit: contain;
+                flex-shrink: 0;
             }
             .proart-hero {
                 background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
@@ -920,36 +931,53 @@ def aplicar_estilos_frontend() -> None:
     )
 
 
-def renderizar_faixa_logos() -> None:
-    logo_ufpel = localizar_logo("ufpel")
-    logo_labserg = localizar_logo("labserg")
-    logo_ceng = localizar_logo("ceng")
+def renderizar_cabecalho_principal() -> None:
+    uri_protools = _arquivo_para_data_uri(localizar_logo("protools"))
+    uri_ufpel = _arquivo_para_data_uri(localizar_logo("ufpel"))
+    uri_labserg = _arquivo_para_data_uri(localizar_logo("labserg"))
+    uri_ceng = _arquivo_para_data_uri(localizar_logo("ceng"))
 
-    def img_tag(caminho: str | None, alt: str) -> str:
-        if not caminho:
-            return ""
-        ext = os.path.splitext(caminho)[1].lower().lstrip(".")
-        mime = "jpeg" if ext == "jpg" else ext
-        with open(caminho, "rb") as f:
-            b64 = base64.b64encode(f.read()).decode("utf-8")
-        return f'<img src="data:image/{mime};base64,{b64}" alt="{alt}">'
+    html_logo_app = (
+        f'<img src="{uri_protools}" alt="PRO Tools" class="protools-header-logo">'
+        if uri_protools
+        else ""
+    )
 
-    tags = [t for t in [
-        img_tag(logo_ufpel, "UFPel"),
-        img_tag(logo_labserg, "LabSErg"),
-        img_tag(logo_ceng, "CEng"),
-    ] if t]
+    logos_dir = []
+    for uri, alt in [
+        (uri_ufpel, "UFPel"),
+        (uri_labserg, "LabSErg"),
+        (uri_ceng, "CEng"),
+    ]:
+        if uri:
+            logos_dir.append(f'<img src="{uri}" alt="{alt}">')
 
-    if tags:
-        st.markdown(
-            '<div class="proart-faixa-logos">' + "".join(tags) + "</div>",
-            unsafe_allow_html=True,
-        )
+    html_dir = (
+        '<div class="protools-header-right">' + "".join(logos_dir) + "</div>"
+        if logos_dir
+        else ""
+    )
+
+    st.markdown(
+        f"""
+        <div class="protools-header-card">
+            <div class="protools-header-left">
+                {html_logo_app}
+                <div>
+                    <div class="protools-header-title">PRO Tools</div>
+                    <div class="protools-header-subtitle">Aplicação do Protocolo de Avaliação PROART</div>
+                </div>
+            </div>
+            {html_dir}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 garantir_csv()
 aplicar_estilos_frontend()
-renderizar_faixa_logos()
+renderizar_cabecalho_principal()
 
 aba_form, aba_res = st.tabs(["Questionário PROART", "Resultados (Acesso Restrito)"])
 
