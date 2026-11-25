@@ -45,17 +45,17 @@ st.markdown(
     <div style="
         display: flex;
         align-items: center;
-        gap: 14px;
-        padding: 10px 18px;
+        gap: 18px;
+        padding: 16px 24px;
         margin-bottom: 14px;
-        border-radius: 10px;
+        border-radius: 12px;
         border: 1px solid rgba(128, 128, 128, 0.25);
         background-color: rgba(255, 255, 255, 0.03);
     ">
-        <img src="data:image/png;base64,{logo_b64}" alt="PRO Tool" style="width: 42px; height: 42px; border-radius: 8px; object-fit: contain;">
+        <img src="data:image/png;base64,{logo_b64}" alt="PRO Tool" style="width: 60px; height: 60px; border-radius: 10px; object-fit: contain;">
         <div>
-            <div style="font-size: 1.35rem; font-weight: 700; line-height: 1.15;">PRO Tool</div>
-            <div style="font-size: 0.85rem; opacity: 0.8;">Aplicação do Protocolo de Avaliação PROART</div>
+            <div style="font-size: 1.7rem; font-weight: 700; line-height: 1.15;">PRO Tool</div>
+            <div style="font-size: 0.98rem; opacity: 0.82;">Aplicação do Protocolo de Avaliação PROART</div>
         </div>
     </div>
     """,
@@ -826,6 +826,8 @@ def aplicar_estilos_frontend() -> None:
             .proart-faixa-logos {
                 display: flex;
                 align-items: center;
+                justify-content: space-evenly;
+                width: 100%;
                 gap: 28px;
                 margin-bottom: 16px;
                 padding: 12px 16px;
@@ -955,8 +957,8 @@ with aba_form:
     st.markdown(
         """
         <div class="proart-hero">
-            <h1>Protocolo de Avaliação PROART</h1>
-            <div class="proart-autores"><strong>Autores:</strong> Renata Heidtmann Bemnvenuti e Douglas Fernandes D'avila</div>
+            <h1>Questionário Vinculado ao Laboratório de Segurança e Ergonomia da UFPel</h1>
+            <div class="proart-autores"><strong>Autores:</strong> Renata Heidtmann Bemvenuti e Douglas Fernandes D'avila</div>
             <p class="proart-subtitulo">Instrumento estruturado em 91 itens distribuídos em 4 escalas e 10 fatores (Facas, 2021).</p>
         </div>
         """,
