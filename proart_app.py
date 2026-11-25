@@ -96,7 +96,7 @@ ESTILOS_ESCALAS = {
         "badge_fg": "#1e40af",
         "descricao": "Avalia divisão das tarefas e divisão social do trabalho.",
     },
-    "EEG_Estilos_de_Gestao": {
+    "EEG_Estilos_de_Gestão": {
         "titulo": "EEG — Estilos de Gestão",
         "sigla": "EEG",
         "borda": "#7c3aed",
@@ -986,14 +986,14 @@ with aba_form:
         """
         <div class="proart-hero">
             <h1>Questionário Vinculado ao Laboratório de Segurança e Ergonomia da UFPel</h1>
-            <div class="proart-autores"><strong>Autores:</strong> Renata Heidtmann Bemvenuti e Douglas Fernandes D'avila</div>
-            <p class="proart-subtitulo">Instrumento estruturado em 91 itens distribuídos em 4 escalas e 10 fatores (Facas, 2021).</p>
+            <div class="proart-autores"><strong>Autores:</strong> Profª. Drª. Engª. Renata Heidtmann Bemvenuti e Douglas Fernandes D'avila (Graduando em Engenharia ELetrônica)</div>
+            <p class="proart-subtitulo">Instrumento estruturado em 91 itens distribuídos em 4 escalas e 10 fatores de acordo com (Facas, 2021).</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    with st.expander("Como preencher e utilizar", expanded=True):
+    with st.expander("Como preencher e utilizar este questionário", expanded=True):
         st.markdown(
             "1. **Dados sociodemográficos e laborais:** informe idade e tempos em números, escolhendo *Meses* ou *Anos* (tudo é padronizado em meses).\n"
             "2. **Escala de respostas (1 a 5):** marque de **1 (Nunca)** a **5 (Sempre)** em cada item.\n"
