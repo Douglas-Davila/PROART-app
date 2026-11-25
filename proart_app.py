@@ -29,8 +29,8 @@ with open(CONFIG_PATH, "r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
 st.set_page_config(
-    page_title="PRO Tool — Questionário PROART",
-    page_icon="protool.png",
+    page_title="PRO Tools — Questionário PROART",
+    page_icon="protools.png",
     layout="wide"
 )
 
