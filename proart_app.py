@@ -30,7 +30,8 @@ with open(CONFIG_PATH, "r", encoding="utf-8") as f:
 
 st.set_page_config(
     page_title="PROART — Avaliação e Análise",
-    layout="wide",
+    page_icon="labserg2.png",
+    layout="wide"
 )
 
 CAMPOS_DEMO = [
