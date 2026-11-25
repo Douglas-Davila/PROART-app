@@ -52,7 +52,7 @@ st.markdown(
         border: 1px solid rgba(128, 128, 128, 0.25);
         background-color: rgba(255, 255, 255, 0.03);
     ">
-        <img src="data:image/png;base64,{logo_b64}" alt="PRO Tools" style="width: 80px; height: 80px; border-radius: 10px; object-fit: contain;">
+        <img src="data:image/png;base64,{logo_b64}" alt="PRO Tools" style="width: 100px; height: 100px; border-radius: 10px; object-fit: contain;">
         <div>
             <div style="font-size: 2rem; font-weight: 700; line-height: 1.15;">PRO Tools</div>
             <div style="font-size: 1.3rem; opacity: 0.82;">Aplicação do Protocolo de Avaliação PROART</div>
