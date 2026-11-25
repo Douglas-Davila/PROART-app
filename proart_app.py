@@ -34,6 +34,34 @@ st.set_page_config(
     layout="wide"
 )
 
+def img_to_base64(caminho_arquivo: str) -> str:
+    with open(caminho_arquivo, "rb") as f:
+        return base64.b64encode(f.read()).decode("utf-8")
+
+logo_b64 = img_to_base64("protools.png")
+
+st.markdown(
+    f"""
+    <div style="
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 10px 18px;
+        margin-bottom: 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(128, 128, 128, 0.25);
+        background-color: rgba(255, 255, 255, 0.03);
+    ">
+        <img src="data:image/png;base64,{logo_b64}" alt="PRO Tool" style="width: 42px; height: 42px; border-radius: 8px; object-fit: contain;">
+        <div>
+            <div style="font-size: 1.35rem; font-weight: 700; line-height: 1.15;">PRO Tool</div>
+            <div style="font-size: 0.85rem; opacity: 0.8;">Aplicação do Protocolo de Avaliação PROART</div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 CAMPOS_DEMO = [
     "idade",
     "sexo",
