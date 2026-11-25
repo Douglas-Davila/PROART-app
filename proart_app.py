@@ -1007,7 +1007,22 @@ with aba_form:
     st.progress(respondidos_atuais / total_itens if total_itens else 0.0)
     st.caption(f"Progresso das questões: {respondidos_atuais} de {total_itens} respondidas.")
 
-    with st.form("form_proart", clear_on_submit=True):
+    CHAVES_DEMO_STATE = [
+        "demo_idade",
+        "demo_sexo",
+        "demo_escolaridade",
+        "demo_estado_civil",
+        "demo_cargo",
+        "demo_lotacao",
+        "demo_tempo_inst",
+        "unid_inst",
+        "demo_tempo_cargo",
+        "unid_cargo",
+        "demo_contrato",
+        "demo_saude",
+    ]
+
+    with st.form("form_proart", clear_on_submit=False):
         st.markdown(
             """
             <div class="proart-secao-demo">
@@ -1020,28 +1035,56 @@ with aba_form:
         c1, c2, c3 = st.columns(3)
 
         with c1:
-            idade_val = st.number_input("Idade (anos)", min_value=14, max_value=100, step=1, value=None, placeholder="Ex.: 28")
-            escolaridade_val = st.selectbox("Escolaridade", [""] + OPCOES_ESCOLARIDADE)
+            idade_val = st.number_input(
+                "Idade (anos)", min_value=14, max_value=100, step=1,
+                value=None, placeholder="Ex.: 28", key="demo_idade"
+            )
+            escolaridade_val = st.selectbox(
+                "Escolaridade", [""] + OPCOES_ESCOLARIDADE, key="demo_escolaridade"
+            )
             t_inst_col1, t_inst_col2 = st.columns([2, 1])
             with t_inst_col1:
-                tempo_inst_val = st.number_input("Tempo na instituição", min_value=0, max_value=600, step=1, value=None, placeholder="Ex.: 24")
+                tempo_inst_val = st.number_input(
+                    "Tempo na instituição", min_value=0, max_value=600, step=1,
+                    value=None, placeholder="Ex.: 24", key="demo_tempo_inst"
+                )
             with t_inst_col2:
-                tempo_inst_unid = st.selectbox("Unidade", ["meses", "anos"], key="unid_inst")
+                tempo_inst_unid = st.selectbox(
+                    "Unidade", ["meses", "anos"], key="unid_inst"
+                )
 
         with c2:
-            sexo_val = st.radio("Sexo / Identidade", [""] + OPCOES_SEXO, horizontal=False)
-            estado_civil_val = st.selectbox("Estado civil", [""] + OPCOES_ESTADO_CIVIL)
+            sexo_val = st.radio(
+                "Sexo / Identidade", [""] + OPCOES_SEXO, horizontal=False, key="demo_sexo"
+            )
+            estado_civil_val = st.selectbox(
+                "Estado civil", [""] + OPCOES_ESTADO_CIVIL, key="demo_estado_civil"
+            )
             t_cargo_col1, t_cargo_col2 = st.columns([2, 1])
             with t_cargo_col1:
-                tempo_cargo_val = st.number_input("Tempo no cargo atual", min_value=0, max_value=600, step=1, value=None, placeholder="Ex.: 12")
+                tempo_cargo_val = st.number_input(
+                    "Tempo no cargo atual", min_value=0, max_value=600, step=1,
+                    value=None, placeholder="Ex.: 12", key="demo_tempo_cargo"
+                )
             with t_cargo_col2:
-                tempo_cargo_unid = st.selectbox("Unidade", ["meses", "anos"], key="unid_cargo")
+                tempo_cargo_unid = st.selectbox(
+                    "Unidade", ["meses", "anos"], key="unid_cargo"
+                )
 
         with c3:
-            cargo_val = st.text_input("Cargo / Função atual", placeholder="Ex.: Analista Administrativo")
-            lotacao_val = st.text_input("Lotação / Setor / Departamento", placeholder="Ex.: Administrativo")
-            contrato_val = st.selectbox("Tipo de vínculo / contrato", [""] + OPCOES_CONTRATO)
-            saude_val = st.radio("Problemas de saúde relacionados ao trabalho (último ano)", [""] + OPCOES_SAUDE)
+            cargo_val = st.text_input(
+                "Cargo / Função atual", placeholder="Ex.: Analista Administrativo", key="demo_cargo"
+            )
+            lotacao_val = st.text_input(
+                "Lotação / Setor / Departamento", placeholder="Ex.: Administrativo", key="demo_lotacao"
+            )
+            contrato_val = st.selectbox(
+                "Tipo de vínculo / contrato", [""] + OPCOES_CONTRATO, key="demo_contrato"
+            )
+            saude_val = st.radio(
+                "Problemas de saúde relacionados ao trabalho (último ano)",
+                [""] + OPCOES_SAUDE, key="demo_saude"
+            )
 
         respostas_itens = {}
         for escala in BLOCOS_ESCALAS:
@@ -1084,7 +1127,10 @@ with aba_form:
     if enviado:
         faltantes = [cod for cod, v in respostas_itens.items() if v is None]
         if faltantes:
-            st.error(f"Existem {len(faltantes)} item(ns) sem resposta. Preencha todos os 91 itens antes de salvar.")
+            st.warning(
+                f"Ainda faltam **{len(faltantes)}** questão(ões) para concluir. "
+                f"Suas respostas atuais continuam marcadas na tela — basta preencher os itens pendentes e clicar em **Salvar Resposta** novamente."
+            )
         else:
             idade_norm = normalizar_numero_inteiro(idade_val)
             t_inst_norm = normalizar_tempo_meses(tempo_inst_val, tempo_inst_unid)
@@ -1105,7 +1151,17 @@ with aba_form:
             }
             registro.update(respostas_itens)
             salvar_resposta_segura(registro)
-            st.success("Resposta salva com sucesso!")
+
+            for chave in CHAVES_DEMO_STATE:
+                st.session_state.pop(chave, None)
+            for cod, _, _, _ in ITENS_PROART:
+                st.session_state.pop(f"item_{cod}", None)
+
+            st.session_state["msg_sucesso_proart"] = "Resposta salva com sucesso!"
+            st.rerun()
+
+    if st.session_state.get("msg_sucesso_proart"):
+        st.success(st.session_state.pop("msg_sucesso_proart"))
 
 with aba_res:
     if "autenticado_resultados" not in st.session_state:
